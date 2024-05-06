@@ -18,7 +18,7 @@ const getAllUsers = ()=>{
 }
 
 //add a new user in the database
-const adddata=(id,username,email,phone,address,img)=>{
+const adddata=(id,username,email,phone,address)=>{
     return db.users.findOne({id}).then((result)=>{
         if(result){//if employee id already exist
             return{
@@ -27,7 +27,7 @@ const adddata=(id,username,email,phone,address,img)=>{
             }
         }
         else{//id is not in the database then it save to the database
-            const newData= db.users({id,username,email,phone,address,img})
+            const newData= db.users({id,username,email,phone,address})
             newData.save()
             return{
                 statusCode:200,
@@ -72,7 +72,7 @@ const viewdata=(id)=>{
     })
 }
 //edit an employee
-const updateemp=(id,username,email,phone,address,img)=>{
+const updateemp=(id,username,email,phone,address)=>{
     return db.users.findOne({id}).then((result)=>{
         if(result){
             //assigning updated information to the database values
@@ -81,7 +81,6 @@ const updateemp=(id,username,email,phone,address,img)=>{
             result.email=email;
             result.phone=phone;
             result.address=address;
-            result.img=img
             //save updated details in db
             result.save()
 
